@@ -7,7 +7,7 @@ initializing of packages and classes within packages. It performs the following 
 
 * Provides a much more convenient way to initialize your package through having a Loader
   class in `yourPackage/.package/Loader.php` that extends the `AbstractLoader` provided.
-* handles a lot of the class loading automatically according to
+* Handles a lot of the class loading automatically according to
   [FIG standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md).
 
 ## Features
@@ -15,6 +15,9 @@ initializing of packages and classes within packages. It performs the following 
 * Lazy loading
 * Load order handling
 * Dependency loading
+* Complies with 
+  [FIG standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
+  to ensure higher compatibility with other packages.
 
 ## Change log
 

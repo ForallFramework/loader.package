@@ -1,12 +1,12 @@
-# Loader - Active Development Version
+# Loader - Version 0.1.0 Beta
 
 ## Description
 
 The "loader" package for the Forall Framework. This package handles loading and
 initializing of packages and classes within packages. It performs the following tasks:
 
-* Provides a much more convenient way to initialize your package through having a Loader
-  class in `yourPackage/.package/Loader.php` that extends the `AbstractLoader` provided.
+* Provides a much more convenient way to initialize your package through specifying
+  includes that either load directly, or lazily as the package starts being used.
 * Handles a lot of the class loading automatically according to
   [FIG standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md).
 

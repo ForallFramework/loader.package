@@ -2,7 +2,6 @@
 
 /**
  * @package forall.loader
- * @version 0.1
  * @author Avaq <aldwin.vlasblom@gmail.com>
  */
 namespace forall\loader;

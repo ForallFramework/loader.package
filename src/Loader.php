@@ -2,7 +2,6 @@
 
 /**
  * @package forall.loader
- * @version 0.1
  * @author Avaq <aldwin.vlasblom@gmail.com>
  */
 namespace forall\loader;
@@ -87,6 +86,9 @@ class Loader extends AbstractCore
       return $this;
     }
     
+    //This package has now been initialized.
+    $this->initializedPackages[] = $package->getName();
+    
     //Get the directory where we expect the source code to be.
     $sourceDir = $this->getPackageSourceDir($package);
     
@@ -149,6 +151,9 @@ class Loader extends AbstractCore
     if(in_array($package->getName(), $this->loadedPackages)){
       return $this;
     }
+    
+    //This package has now had its dependencies loaded.
+    $this->loadedPackages[] = $package->getName();
     
     //Get the instance of core, loading settings and source directory.
     $core = Core::getInstance();
@@ -290,6 +295,7 @@ class Loader extends AbstractCore
     
     //Apply default values.
     $settings = array_merge([
+      'sourceDirectory' => '',
       'staticIncludes' => [],
       'includes' => [],
       'coreClasses' => [],
@@ -313,10 +319,7 @@ class Loader extends AbstractCore
   public function getPackageSourceDir(PackageDescriptor $package)
   {
     
-    return $package->getFullPath().(array_key_exists('sourceDirectory', $package->getMeta())
-      ? '/'.$package->getMeta()['sourceDirectory']
-      : ''
-    );
+    return $package->getFullPath().$this->getLoadingSettings($package)['sourceDirectory'];
     
   }
   

@@ -1,4 +1,12 @@
 #### [Version 0.1.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.1.1-beta)
+_4-June-2013_
+
+* Development discontinued.
+* Bug fixes:
+  - Includes don't use the right path to load from.
+  - Initializing a package gives errors.
+
+#### [Version 0.1.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.1.1-beta)
 _30-May-2013_
 
 * Removed @version tags from files.

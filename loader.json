@@ -1,6 +1,6 @@
 {
   
-  "sourceDirectory": "src/",
+  "sourceDirectory": "/src",
   "dependencies": ["core"]
   
 }

@@ -1,4 +1,8 @@
-# Loader - Version 0.1.1 Beta
+# Loader - Version 0.1.2 Beta
+
+## Warning!
+
+The development of this package has been discontinued in favour of Composer.
 
 ## Description
 

@@ -96,7 +96,7 @@ class Loader extends AbstractCore
     $nssep = $this->getPackageNamespaceSeparator($package);
     
     //Make the name space.
-    $namespace = $nssep.str_replace(['.', '/', '\\', '_'], $nssep, $package->getName());
+    $namespace = str_replace(['.', '/', '\\', '_'], $nssep, $package->getName());
     
     //Create a class loader for the package.
     $classLoader = new ClassLoader($namespace, $sourceDir);
@@ -109,15 +109,16 @@ class Loader extends AbstractCore
     //Register the loader on the auto-load stack.
     $classLoader->register();
     
-    //Get the package loading settings.
+    //Get the package loading settings and core instance.
     $settings = $this->getLoadingSettings($package);
+    $core = Core::getInstance();
     
     //Register Core class loaders.
     foreach($settings['coreClasses'] as $name => $className)
     {
       
       //Append the class name to the root namespace.
-      $className = $namespace.$nssep.$className;
+      $className = $nssep.$namespace.$nssep.$className;
       
       //Register a loader for the class.
       $core->registerInstanceLoader($name, function()use($className, $package){
@@ -215,7 +216,7 @@ class Loader extends AbstractCore
     }
     
     //Get the package root.
-    $root = $package->getRoot();
+    $root = $package->getFullPath();
     
     //Iterate the includes.
     foreach($includes as $path)
@@ -227,7 +228,7 @@ class Loader extends AbstractCore
       }
       
       //We prepend the package root to the path.
-      $path = "$root$path";
+      $path = $root.$path;
       
       //We include the file.
       $includer($path);

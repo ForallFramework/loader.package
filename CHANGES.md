@@ -1,4 +1,4 @@
-#### [Version 0.1.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.1.1-beta)
+#### [Version 0.1.2 Beta](https://github.com/ForallFramework/loader.package/tree/0.1.2-beta)
 _4-June-2013_
 
 * Development discontinued.

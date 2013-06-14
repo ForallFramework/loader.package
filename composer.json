@@ -1,0 +1,31 @@
+{
+  
+  "name": "forall/loader",
+  "description": "Provides a much more convenient way to initialize your package, and handles a lot of the class loading automatically.",
+  "license": "MIT",
+  
+  "authors": [
+    {
+      "name": "Aldwin 'Avaq' Vlasblom",
+      "email": "aldwin.vlasblom@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  
+  "support": {
+    "source": "https://github.com/ForallFramework/loader.package",
+    "issues": "https://github.com/ForallFramework/loader.package/issues"
+  },
+  
+  "require": {
+    "php": ">=5.4.0",
+    "forall/core": "*"
+  },
+  
+  "autoload": {
+    "psr-0": {
+      "forall\\loader": "src/"
+    }
+  }
+  
+}

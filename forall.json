@@ -1,5 +1,0 @@
-{
-  "name": "forall.loader",
-  "title": "Forall loader package.",
-  "description": "Provides a much more convenient way to initialize your package, and handles a lot of the class loading automatically."
-}

@@ -1,27 +1,16 @@
-# Loader - Version 0.1.2 Beta
-
-## Warning!
-
-The development of this package has been discontinued in favour of Composer.
+# Loader - Version 0.2.0 Beta
 
 ## Description
 
-The "loader" package for the Forall Framework. This package handles loading and
-initializing of packages and classes within packages. It performs the following tasks:
+The "loader" package for the Forall Framework. This package extends the capabilities of
+what is possible with `main.php`. It performs the following tasks:
 
-* Provides a much more convenient way to initialize your package through specifying
-  includes that either load directly, or lazily as the package starts being used.
-* Handles a lot of the class loading automatically according to
-  [FIG standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md).
+* Provides an interface to hook into the loading process, allowing much more control over
+  the order in which your `main.php` file executes.
 
 ## Features
 
-* Lazy loading
 * Load order handling
-* Dependency loading
-* Complies with 
-  [FIG standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
-  to ensure higher compatibility with other packages.
 
 ## Change log
 

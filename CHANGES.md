@@ -1,15 +1,16 @@
 #### [Version 0.2.0 Beta](https://github.com/ForallFramework/loader.package/tree/0.2.0-beta)
-_?-June-2013_
+_15-June-2013_
 
-* This package has been re-purposed as an extension for composer that will enable lazy-
-  loading of includes, handling load-order based on dependencies and accessing package's
-  entry points.
-  - Everything was converted to a composer format.
-    * Moved files to subdirectories.
-    * Added `composer.json` and removed old json files.
+* Converted to composer.
+  - Moved files to subdirectories.
+  - Added `composer.json` and removed old json files.
   - Removed auto-loading of classes.
-  - Added Composer hooks to store of loader specific settings.
-
+* This package has been re-purposed.
+  - The loader now merely extends the very rudimentary loading system provided by the core
+    package to allow for more control over the order in which the main.php code is executed.
+  - Added AbstractLoader to provide an interface that can be extended in order to hook
+    into the entry point loading.
+  - Complete re-factoring of the Loader class, including changes to work with core 0.4.0.
 
 #### [Version 0.1.2 Beta](https://github.com/ForallFramework/loader.package/tree/0.1.2-beta)
 _4-June-2013_

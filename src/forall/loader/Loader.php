@@ -34,9 +34,62 @@ class Loader extends AbstractCore
   }
   
   /**
+   * Does the loading sequence.
+   *
+   * @return self Chaining enabled.
+   */
+  public function activateLoaders()
+  {
+    
+    //Find loaders.
+    $descriptors = $this->findLoaders();
+    
+    //If no loaders are found, we are done.
+    if(empty($descriptors)){
+      return $this;
+    }
+    
+    //Get rid of already activated loaders.
+    $descriptors = $this->cleanLoaders($descriptors);
+    
+    //If no loaders are found, we are done.
+    if(empty($descriptors)){
+      return $this;
+    }
+    
+    //Sort the loaders based on load-order.
+    $descriptors = $this->resolveLoadOrder($descriptors);
+    
+    //Iterate the descriptors and map their loaders.
+    $loaders = [];
+    foreach($descriptors as $descriptor){
+      $loaders[] = $descriptor->className;
+    }
+    
+    //Iterate the loaders and execute their preLoad methods.
+    foreach($loaders as $loader){
+      $loader::preLoad();
+    }
+    
+    //Iterate the loaders and execute their load methods.
+    foreach($loaders as $loader){
+      $loader::load();
+    }
+    
+    //Iterate the loaders and execute their postLoad methods.
+    foreach($loaders as $loader){
+      $loader::postLoad();
+    }
+    
+    //Enable chaining.
+    return $this;
+    
+  }
+  
+  /**
    * Find and return Loader classes.
    * 
-   * Returns an array of strings that represent the names of classes extending AbstractLoader.
+   * Returns an array LoaderDescriptors containing info about classes extending AbstractLoader.
    *
    * @return LoaderDescriptor[]
    */
@@ -56,7 +109,7 @@ class Loader extends AbstractCore
       $className = "$ns\\Loader";
       
       //Append to the result if the class exists.
-      if(class_exists($className) && is_subclass_of('forall\\loader\\AbstractLoader', $className)){
+      if(class_exists($className) && is_subclass_of($className, 'forall\\loader\\AbstractLoader')){
         $result[] = new LoaderDescriptor($className, $name);
       }
       
@@ -68,44 +121,23 @@ class Loader extends AbstractCore
   }
   
   /**
-   * Does the loading sequence.
+   * Removes already loaded loaders from the given array of loader descriptors.
    *
-   * @return self Chaining enabled.
+   * @param  LoaderDescriptor[]  $descriptors The array of loader descriptors.
+   *
+   * @return LoaderDescriptor[]               The cleaned array of loader descriptors.
    */
-  public function activateLoaders()
-  {
-    
-    //Find loaders.
-    $loaders = $this->findLoaders();
-    
-    //If no loaders are found, we are done.
-    if(empty($loaders)){
-      return $this;
-    }
-    
-    $loaders = $this->cleanLoaders($loaders);
-    
-    $loaders = $this->resolveLoadOrder($loaders);
-    
-    var_dump($loaders);
-    
-  }
-  
-  /**
-   * Removes already loaded loaders from the given array of loaders.
-   *
-   * @param  LoaderDescriptor[]  $loaders The array of loaders.
-   *
-   * @return LoaderDescriptor[]           The cleaned array of loaders.
-   */
-  public function cleanLoaders(array $loaders)
+  public function cleanLoaders(array $descriptors)
   {
     
     //Create the result.
     $result = [];
     
     //Iterate the given loaders.
-    foreach($loaders as $loader){
+    foreach($descriptors as $descriptor){
+      
+      //Get the loader.
+      $loader = $descriptor->className;
       
       //Skip already loaded loaders.
       if($loader::isActivated()){
@@ -113,7 +145,7 @@ class Loader extends AbstractCore
       }
       
       //Append the loader to the result.
-      $result[] = $loader;
+      $result[] = $descriptor;
       
     }
     
@@ -123,20 +155,20 @@ class Loader extends AbstractCore
   }
   
   /**
-   * Resolves the load-order for the given array of loaders.
+   * Resolves the load-order for the given array of loader descriptors.
    *
-   * @param  LoaderDescriptor[]  $loaders The array of loaders.
+   * @param  LoaderDescriptor[]  $descriptors The array of loader descriptors.
    *
-   * @return LoaderDescriptor[]           The sorted array of loaders.
+   * @return LoaderDescriptor[]               The sorted array of loader descriptors.
    */
-  public function resolveLoadOrder(array $loaders)
+  public function resolveLoadOrder(array $descriptors)
   {
     
     //Get the instance of Core.
     $core = forall('core');
     
     //Attempt to resolve the load order.
-    $success = usort($loaders, function($a, $b)use($core){
+    $success = usort($descriptors, function($a, $b)use($core){
       
       //Get the package name of A.
       $package = $core->normalizePackageName($a->packageName);
@@ -150,7 +182,15 @@ class Loader extends AbstractCore
       
     });
     
-    var_dump($loaders);
+    //Make sure it worked.
+    if(!$success){
+      throw new LoaderException(
+        'The load-order of entry points could not be resolved. Possible circular dependency.'
+      );
+    }
+    
+    //Return the sorted array.
+    return $descriptors;
     
   }
   

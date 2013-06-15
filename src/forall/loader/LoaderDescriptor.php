@@ -33,7 +33,7 @@ class LoaderDescriptor
   public function __construct($className, $packageName)
   {
     
-    $this->class = $className;
+    $this->className = $className;
     $this->packageName = $packageName;
     
   }

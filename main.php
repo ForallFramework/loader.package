@@ -9,7 +9,7 @@ $core->onMainFilesIncluded(function($core){
   //Register the instance with the core.
   $core->registerInstance('loader', $loader);
   
-  //Initialize.
+  //Initialize the instance, calling it's `init` method.
   $core->initializeInstance($loader);
   
   //Execute the loading sequence.

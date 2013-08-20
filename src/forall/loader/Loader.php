@@ -41,11 +41,15 @@ class Loader extends AbstractCore
   public function activateLoaders()
   {
     
+    //Get the system logger.
+    $logger = forall('core')->getSystemLogger();
+    
     //Find loaders.
     $descriptors = $this->findLoaders();
     
     //If no loaders are found, we are done.
     if(empty($descriptors)){
+      $logger->info('No package loaders found. Nothing loaded by forall.loader.');
       return $this;
     }
     
@@ -54,6 +58,7 @@ class Loader extends AbstractCore
     
     //If no loaders are found, we are done.
     if(empty($descriptors)){
+      $logger->info('No new package loaders found. Nothing new loaded by forall.loader.');
       return $this;
     }
     
@@ -68,6 +73,7 @@ class Loader extends AbstractCore
     
     //Iterate the loaders and execute their preLoad methods.
     foreach($loaders as $loader){
+      $logger->debug(sprintf('Calling preLoad for %s.', $loader));
       $loader::preLoad();
     }
     
@@ -88,7 +94,7 @@ class Loader extends AbstractCore
   
   /**
    * Find and return Loader classes.
-   * 
+   *
    * Returns an array LoaderDescriptors containing info about classes extending AbstractLoader.
    *
    * @return LoaderDescriptor[]
@@ -196,7 +202,7 @@ class Loader extends AbstractCore
   
   /**
    * Load a PHP-extension.
-   * 
+   *
    * This method returns `true` when the extension has successfully loaded and false if
    * the attempt to load it failed.
    *

@@ -28,7 +28,7 @@ abstract class AbstractLoader
   
   /**
    * Return an array of normalized dependency names.
-   * 
+   *
    * Returns the result of `getDependencies()` where every dependency name is first
    * normalized by `Core::normalizePackageName()`.
    *
@@ -51,7 +51,7 @@ abstract class AbstractLoader
   
   /**
    * No-op. Optional to implement.
-   * 
+   *
    * When implemented, gets called before any of the packages' actual load methods are called.
    *
    * @return void Should return void.
@@ -70,7 +70,7 @@ abstract class AbstractLoader
   
   /**
    * No-op. Optional to implement.
-   * 
+   *
    * When implemented, gets called after all of the packages' actual load methods are called.
    *
    * @return void Should return void.

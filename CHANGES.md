@@ -1,3 +1,9 @@
+#### [Version 0.2.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.2.0-beta)
+_20-Aug-2013_
+
+* Implemented some logging here and there.
+* Removed trailing white-space.
+
 #### [Version 0.2.0 Beta](https://github.com/ForallFramework/loader.package/tree/0.2.0-beta)
 _15-June-2013_
 

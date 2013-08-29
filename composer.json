@@ -19,7 +19,7 @@
   
   "require": {
     "php": ">=5.4.0",
-    "forall/core": "*"
+    "forall/core": "0.5.2-beta"
   },
   
   "autoload": {

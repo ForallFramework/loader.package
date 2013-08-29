@@ -1,4 +1,9 @@
-#### [Version 0.2.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.2.0-beta)
+#### [Version 0.2.1 Discontinued](https://github.com/ForallFramework/loader.package/tree/0.2.1-dc)
+_29-Aug-2013_
+
+* This package has once again been discontinued, as the Core package now does all it was good for.
+
+#### [Version 0.2.1 Beta](https://github.com/ForallFramework/loader.package/tree/0.2.1-beta)
 _20-Aug-2013_
 
 * Implemented some logging here and there.

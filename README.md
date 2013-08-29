@@ -1,4 +1,8 @@
-# Loader - Version 0.2.1 Beta
+# Loader - Version 0.2.1 Discontinued
+
+## Notice
+
+**This package is no longer in development and only works with core.package 0.5.2 Beta.**
 
 ## Description
 
